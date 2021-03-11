@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.sns.service.dao.FeedDAO">
+	
+	<select id="getFeedCount" resultType="String">
+		select max(TXT_NUM) from sns_text
+	</select>
+
+	<insert id="insertText">
+		<selectKey keyProperty="TXT_NUM" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(TXT_NUM), 0)+1 FROM SNS_TEXT
+	</selectKey>
+		INSERT INTO SNS_Text (TXT_NUM, ID, TXT_DATE, TXT, HASH_TAG, PRIVACY)
+			VALUES(#{TXT_NUM}, #{id}, SYSDATE, #{txt}, #{HASH_TAG}, #{privacy})
+	</insert>
+
+	<insert id="insertImg">
+		<selectKey keyProperty="TXT_NUM" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(TXT_NUM), 0)+1 FROM SNS_TEXT
+	</selectKey>
+		INSERT INTO SNS_Text (TXT_NUM, ID, TXT_DATE, TXT , TXT_FILE, HASH_TAG, PRIVACY)
+			VALUES(#{TXT_NUM}, #{id}, SYSDATE, #{txt}, #{TXT_FILE}, #{HASH_TAG}, #{privacy})
+	</insert>	
+
+	<select id="getComments" resultType="commentVO">
+		SELECT C.TXT_NUM, C.CM_ID, C.CM_COMMENT, C.COMMENT_DATE, M.MEMIMG
+		 FROM SNS_MEMBER_TABLE M, SNS_COMMENT C 
+		 WHERE TXT_NUM = #{TXT_NUM} AND M.ID = C.CM_ID
+	</select>
+	
+	<select id="getFeed" resultType="textVO">
+		SELECT * FROM (SELECT * FROM SNS_TEXT WHERE TXT_NUM=#{TXT_NUM} ORDER BY TXT_DATE DESC) WHERE ROWNUM=1 
+	</select>
+	
+	<select id="getGoodBad" resultType="goodBadVO">
+		SELECT * FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM}
+	</select>
+	
+	<select id="getTXT_NUM" resultType="int">
+		SELECT TXT_NUM FROM SNS_TEXT WHERE ID=#{id} ORDER BY TXT_NUM DESC
+	</select>
+	
+	<insert id="goodInsertPlus">
+		<selectKey keyProperty="like" resultType="int" order="AFTER">
+			SELECT count(*) FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM} AND GOODBAD='O'
+		</selectKey>
+		INSERT INTO SNS_TEXT_GOODBAD VALUES(#{TXT_NUM}, #{id}, 'O')
+	</insert>
+	
+	<insert id="badInsertPlus">
+		<selectKey keyProperty="hate" resultType="int" order="AFTER">
+			SELECT count(*) FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM} AND GOODBAD='X'
+		</selectKey>
+		INSERT INTO SNS_TEXT_GOODBAD VALUES(#{TXT_NUM}, #{id}, 'X')
+	</insert>
+		
+	<delete id="deleteGoodBad">
+		DELETE FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM} AND ID=#{id} 
+	</delete>
+	
+	<select id="getLikeCount" resultType="int">
+		SELECT count(*) FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM} AND GOODBAD='O'
+	</select>
+	<select id="getHateCount" resultType="int">
+		SELECT count(*) FROM SNS_TEXT_GOODBAD WHERE TXT_NUM=#{TXT_NUM} AND GOODBAD='X'
+	</select>
+	
+	<update id="updateGoodBad">
+		UPDATE SNS_TEXT_GOODBAD SET GOODBAD=#{GOODBAD} WHERE TXT_NUM=#{TXT_NUM} AND ID=#{id}
+	</update>
+	
+	<insert id="addComment">
+		INSERT INTO SNS_COMMENT VALUES(#{TXT_NUM}, #{CM_ID}, #{CM_COMMENT}, SYSDATE)
+	</insert>
+</mapper>

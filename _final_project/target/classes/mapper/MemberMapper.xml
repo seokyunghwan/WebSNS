@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.sns.service.dao.MemberDAO">
+	<select id="searchId" resultType="String">
+		SELECT id FROM SNS_MEMBER_TABLE WHERE memname=#{memname} AND email=#{email} 
+	</select>
+	
+	<select id="searchPw" resultType="String">
+		SELECT pw FROM SNS_MEMBER_TABLE WHERE id=#{id} and email=#{email}
+	</select>
+	
+	<update id="updateProfile">
+		UPDATE SNS_MEMBER_TABLE SET memimg=#{memimg} where id=#{id}
+	</update>
+	
+	<select id="updateVO" resultType="memVO">
+		SELECT * FROM SNS_MEMBER_TABLE WHERE id=#{id}
+	</select>
+	
+	<update id="updateMem">
+		UPDATE SNS_MEMBER_TABLE SET pw=#{pw}, memname=#{memname}, email=#{email} where id=#{id}
+	</update>
+	
+	<select id="login" resultType="memVO">
+		SELECT * FROM SNS_MEMBER_TABLE WHERE id=#{id} AND pw=#{pw}
+	</select>
+	
+	<select id="searchEmail" resultType="int">
+		SELECT count(*) FROM SNS_MEMBER_TABLE WHERE email=#{email}
+	</select>
+	
+	<insert id="insertMem">
+		INSERT INTO SNS_MEMBER_TABLE (id, pw, memname, email)
+		VALUES(#{id}, #{pw}, #{memname}, #{email})
+	</insert>
+	
+	<update id="loginmem">
+		UPDATE SNS_MEMBER_TABLE SET loginstate='On' where id=#{id}
+	</update>
+	
+	<select id="getOne" resultType="memVO">
+		SELECT id, memname, memimg, email, loginstate FROM SNS_MEMBER_TABLE WHERE id=#{id}
+	</select>
+	
+	<delete id="deleteMem">
+		DELETE FROM SNS_MEMBER_TABLE WHERE ID=#{id}
+	</delete>
+	
+	<update id="logoutmem">
+		UPDATE SNS_MEMBER_TABLE SET loginstate='Off' where id=#{id}
+	</update>
+</mapper>

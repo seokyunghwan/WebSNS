@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+.title {
+	width: 330px;
+	height: 40px;
+	border-bottom: 1px solid #ff9900;
+	margin-bottom: 30px;
+	padding-bottom: 5px;
+	box-sizing: border-box;
+	font-size: 20px;
+	color: #ff9900;
+	text-align: center;
+}
+
+.pwchk {
+	width: 200px;
+	height: 25px;
+	border: 1px solid #999;
+	box-sizing: border-box;
+}
+
+.textbox {
+	width: 200px;
+	height: 25px;
+	border: 1px solid #999;
+	box-sizing: border-box;
+}
+
+.labelpic {
+	text-align: center;
+}
+
+.labelid {
+	font-size: 14px;
+	color: #666;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+.labelpw {
+	font-size: 14px;
+	color: #666;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+.labelname {
+	font-size: 14px;
+	color: #666;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+.labelemail {
+	font-size: 14px;
+	color: #666;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+.table2 {
+	margin-top: 10px;
+}
+
+.updateid {
+	font-size: 14px;
+	color: #666;
+}
+
+.updatename {
+	font-size: 14px;
+	color: #666;
+}
+
+.updateemail {
+	font-size: 14px;
+	color: #666;
+}
+
+.btnwrap {
+	width: 100%;
+	text-align: center;
+}
+
+.btn-sign {
+	cursor: pointer; width : 129px;
+	height: 35px;
+	background-color: #ff9900;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	top: 1px;
+	margin-bottom: 5px;
+	width: 129px;
+}
+
+/* .btn-signIn { */
+/* 	cursor : pointer; */
+/* 	width: 129px; */
+/* 	height: 35px; */
+/* 	background-color: #999; */
+/* 	border : none; */
+/* 	text-decoration: none; */
+/* 	display: inline-block; */
+/* 	border-radius: 3px; */
+/* 	color: #fff; */
+/* 	font-size: 14px; */
+/* 	font-weight: bold; */
+/* 	line-height: 35px; */
+/* } */
+
+.updatebtn a {
+	width: 129px;
+	height: 35px;
+	background-color: #ff9900;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 35px;
+}
+
+.deletebtn a {
+	margin-top: 10px;
+	width: 129px;
+	height: 35px;
+	background-color: #999;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 35px;
+}

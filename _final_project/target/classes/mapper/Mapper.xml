@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.sns.service.dao.SnsDAO">
+	
+	<delete id="deleteMem">
+		DELETE FROM SNS_MEMBER_TABLE WHERE id=#{id}
+	</delete>
+	
+	<select id="getFriend" resultType="FriendVO">
+		select f.fid frid, t.memname frname, t.loginstate loginstate from SNS_Member_Friend f join SNS_Member_Table t on f.fid=t.id where f.id=#{id}
+	</select>
+	
+	<select id="searchUser" resultType="memVO">
+		SELECT ID , MEMNAME
+		FROM SNS_MEMBER_TABLE
+		WHERE 1=1
+		AND ID LIKE '%' || #{searchTxt} || '%'
+		OR MEMNAME LIKE '%' || #{searchTxt} || '%'
+	</select>
+	
+	<select id="searchtxt" resultType="textVO">
+		select * from SNS_Text WHERE ID LIKE '%' || #{searchTxt} || '%' or txt LIKE '%' || #{searchTxt} || '%' or HASH_TAG like '%' || #{searchTxt} || '%'
+	</select>
+		
+	<insert id="addFriend">
+		INSERT INTO SNS_MEMBER_FRIEND (ID, FID) VALUES (#{id}, #{fid})
+	</insert>
+	
+	<select id="getAllMSG" resultType="msgVO">
+		select * from SNS_Msg where read_id=#{read_id}
+	</select>
+	
+	<select id="getMSG" resultType="msgVO">
+		select * from SNS_Msg where msgnum=#{msgnum}
+	</select>
+	
+	<update id="upSns_frd">
+		UPDATE SNS_Msg SET add_Friend = 'X' where msgnum=#{msgnum}
+	</update>
+	
+	<update id="upSns_Msg">
+		UPDATE SNS_Msg SET mstate = 'O' where msgnum=#{msgnum}
+	</update>
+	
+	<insert id="AddSNS_Msg">
+		insert into SNS_Msg(msgnum, send_id, read_id, msg, add_Friend) values((select nvl(MAX(msgnum)+1,1) from SNS_Msg),#{send_id},#{read_id},'', 'O')
+	</insert>
+	
+	<insert id="AddSNS_Msg2">
+		insert into SNS_Msg(msgnum, send_id, read_id, msg) values((select nvl(MAX(msgnum)+1,1) from SNS_Msg),#{send_id},#{read_id},#{msg})
+	</insert>
+	
+	
+	<insert id="addGroup">
+		<selectKey keyProperty="gNum" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(GROUP_CODE), 0)+1 FROM SNS_GROUP
+	</selectKey>
+		INSERT INTO SNS_GROUP (GROUP_CODE, GROUP_NAME)
+			VALUES(#{gNum}, #{groupName})
+	</insert>
+	
+	<select id="searchajax" resultType="SajaxVO">
+		SELECT a.mmcnt, b.txcnt, c.grcnt FROM
+        (select count(*) mmcnt from SNS_MEMBER_TABLE WHERE ID LIKE '%' || #{searchTxt} || '%' OR memname LIKE '%' || #{searchTxt} || '%') a,
+        (select count(*) txcnt from SNS_Text WHERE ID LIKE '%' || #{searchTxt} || '%' or txt LIKE '%' || #{searchTxt} || '%' or HASH_TAG like '%' || #{searchTxt} || '%') b,
+        (select count(*) grcnt from SNS_group where group_name like '%' || #{searchTxt} || '%') c
+	</select>
+	
+	
+
+	<select id="friendsFeed" resultType="textVO"> 
+		SELECT T.* FROM SNS_TEXT T, SNS_MEMBER_FRIEND F WHERE F.FID=T.ID AND F.ID=#{id} ORDER BY TXT_NUM DESC
+	</select>
+	
+	<select id="getMyFeeds" resultType="textVO">
+		SELECT * FROM SNS_TEXT WHERE ID=#{id} ORDER BY TXT_NUM DESC
+	</select>
+	
+	<select id="getTXT" resultType="int">
+		SELECT TXT_NUM FROM SNS_TEXT WHERE txt=#{txt} ORDER BY TXT_NUM DESC
+	</select>
+</mapper>

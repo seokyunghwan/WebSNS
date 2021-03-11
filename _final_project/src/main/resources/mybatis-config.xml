@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration >
+	<settings >
+		<setting value="VARCHAR" name="jdbcTypeForNull"></setting>
+	</settings>
+	<typeAliases>
+		<typeAlias alias="memVO" type="com.finalproject.sns.vo.MemVO"/>
+		<typeAlias alias="textVO" type="com.finalproject.sns.vo.TextVO"/>
+		<typeAlias alias="FriendVO" type="com.finalproject.sns.vo.FriendVO"/>
+		<typeAlias alias="msgVO" type="com.finalproject.sns.vo.MsgVO" />
+		<typeAlias alias="groupVO" type="com.finalproject.sns.vo.GroupVO"/>
+		<typeAlias alias="SajaxVO" type="com.finalproject.sns.vo.SearchajaxVo"/>
+		<typeAlias alias="commentVO" type="com.finalproject.sns.vo.CommentVO"/>
+     	<typeAlias alias="GoodBadVO" type="com.finalproject.sns.vo.GoodBadVO"/>
+     	
+	</typeAliases>
+	
+</configuration>
+

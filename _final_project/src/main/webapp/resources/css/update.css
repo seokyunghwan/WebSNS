@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+
+.update{
+	border-radius: 10px;
+	margin:auto;
+	width:500px;
+	height:auto;
+	background-color: white;
+}
+
+.title {
+	text-align: center;
+	padding-top: 30px;
+	width: 500px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #ff9900;
+}
+
+#title {
+	padding-right: 100px;
+	height: 55px;
+}
+
+strong {
+	font-size: 25px;
+}
+
+.myinfo {
+	padding-top: 10px;
+}
+
+.profile {
+	height: 52px;
+	display: inline-block;
+}
+
+.profile img{
+	border-radius: 4px;
+}
+
+.write {
+	padding-bottom: 10px;
+	
+}
+
+.write textarea{
+	resize: none;
+	border: 1px solid #2f2f2f;
+	border-radius: 4px;
+}
+
+
+.add {
+	height: 52px;
+	border: 1px solid #2f2f2f;
+	border-radius: 4px;
+}
+
+
+
+.add-b{
+	padding-left:10px;
+	display: inline-block;
+	padding-right: 330px;
+	border-radius: 4px;
+}
+.add-camera{
+	position:relative;
+	top: 10px;
+	display:inline-block;
+	width: 34px;
+	height: 34px;
+	overflow: hidden;
+	border-radius: 4px;
+	
+}
+.add-friend{
+	position:relative;
+	top: 10px;
+	display: inline-block;
+	width: 34px;
+	height: 34px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+.add-camera label{
+	display: inline-block;
+	width: 34px;
+	height: 34px;
+	
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+}
+
+#uploadFile {
+	position: absolute; 
+	width: 1px;
+	height: 1px;
+	padding:0;
+	margin:-1px;
+	overflow:hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+/* .camera-img{
+	position: relative;
+	top: -34px;
+	border: solid;
+} */
+
+.friend {
+	cursor: pointer;
+	width: 34px;
+	height: 34px;
+	background-color: white;
+	background-image: url('../img/friend.png');
+	border: 1px solid #ebebeb;
+}
+.update{
+	padding-top: 30px;
+	
+}
+
+
+.update-btn{
+	font-size:20px;
+	width: 100%;
+}
+.x {
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	background-color: white;
+	background-image: url('../img/x.png');
+	border-radius: 4px;
+}
